@@ -1,5 +1,7 @@
 Flask
 scikit-learn
+re
+tqdm
 numpy
 Youtube_transcript_api
 torch
