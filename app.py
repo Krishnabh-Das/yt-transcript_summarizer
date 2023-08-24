@@ -1,32 +1,13 @@
+import requests
 from flask import Flask, request, jsonify
-from summarizer.sbert import BertSummarizer
-import re
 from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api._errors import TranscriptsDisabled
 
 app = Flask(__name__)
 
-# Initialize the BertSummarizer
-model = BertSummarizer('bert-base-uncased')
+TEXTTEASER_API_URL = "http://api.textteaser.com/summary"
 
-def summarize_text(text):
-    sentences = nltk.sent_tokenize(text)
-    summary = sentences[0]
-    for sentence in sentences[1:]:
-        summary += ' ' + sentence
-    summary = summary[:500] + '...' if len(summary) > 500 else summary
-    return summary
-
-def clean_text(text):
-    # Remove extra spaces and spaces before punctuation
-    cleaned_text = re.sub(r'\s+', ' ', text)
-    cleaned_text = re.sub(r'\s([.,;!?])', r'\1', cleaned_text)
-    return cleaned_text.strip()
-
-def remove_bracketed_words(text):
-    # Remove words enclosed in square brackets including the brackets
-    cleaned_text = re.sub(r'\[.*?\]', '', text)
-    return cleaned_text
+# Rest of your code...
 
 def get_summary_from_link(link):
     try:
@@ -40,11 +21,14 @@ def get_summary_from_link(link):
         for i in transcript:
             result += i['text']+' '
 
-        result = model(result, num_sentences=5)  # Use the model for summarization
+        # Make a request to the TextTeaser API
+        params = {'text': result}
+        response = requests.get(TEXTTEASER_API_URL, params=params)
+        summary = response.text
 
-        cleaned_out = remove_bracketed_words(result)  # Remove words and brackets
+        cleaned_out = remove_bracketed_words(summary)  # Remove words and brackets
         cleaned_out = clean_text(cleaned_out)
-
+        
         return cleaned_out
 
     except TranscriptsDisabled as e:
