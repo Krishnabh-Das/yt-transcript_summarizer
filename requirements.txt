@@ -2,6 +2,7 @@ pip
 numpy
 flask
 transformers
+tensorflow
 tensorflow-gpu
 tqdm
 torch
