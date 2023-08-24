@@ -7,7 +7,7 @@ from youtube_transcript_api._errors import TranscriptsDisabled
 app = Flask(__name__)
 
 model_name = "facebook/bart-small-cnn"
-summarizer = pipeline('summarization', model=model_name, revision="a4f8f3e")
+summarizer = pipeline('summarization', model="facebook/bart-cnn")
 
 def processing(result, value):
     def clean_text(text):
