@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
-from gensim.summarization import summarize
+from gensim import summarization import summarize
+from summarization import summarize
 import re
 from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api._errors import TranscriptsDisabled
