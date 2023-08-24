@@ -41,9 +41,8 @@ def get_summary_from_link(link):
 def summarize_route():
     try:
         video_link = str(request.form.get('video_link'))
-        value = int(request.form.get('value'))
 
-        final_summary = get_summary_from_link(video_link, value)
+        final_summary = get_summary_from_link(video_link)
         return jsonify({'summary': final_summary})
 
     except Exception as e:
