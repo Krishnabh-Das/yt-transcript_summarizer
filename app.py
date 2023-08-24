@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 from summarizer import Summarizer
-from summarizer import sbert
-from sbert import SBertSummarizer
+from summarizer.sbert import BertSummarizer
 import re
 from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api._errors import TranscriptsDisabled
