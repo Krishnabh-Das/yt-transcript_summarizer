@@ -1,4 +1,5 @@
 numpy
 flask
+gensim.summarization
 youtube_transcript_api
 gunicorn
