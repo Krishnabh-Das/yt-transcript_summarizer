@@ -3,11 +3,9 @@ from flask import Flask, request, jsonify
 from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api._errors import TranscriptsDisabled
 
+import summarizer
+
 app = Flask(__name__)
-
-TEXTTEASER_API_URL = "http://api.textteaser.com/summary"
-
-# Rest of your code...
 
 def get_summary_from_link(link):
     try:
@@ -21,15 +19,10 @@ def get_summary_from_link(link):
         for i in transcript:
             result += i['text']+' '
 
-        # Make a request to the TextTeaser API
-        params = {'text': result}
-        response = requests.get(TEXTTEASER_API_URL, params=params)
-        summary = response.text
+        # Make a request to the Summarizer API
+        summary = summarizer.summarize(result)
 
-        cleaned_out = remove_bracketed_words(summary)  # Remove words and brackets
-        cleaned_out = clean_text(cleaned_out)
-        
-        return cleaned_out
+        return summary
 
     except TranscriptsDisabled as e:
         return "Transcripts are disabled for this video."
