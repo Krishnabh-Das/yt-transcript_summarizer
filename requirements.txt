@@ -1,6 +1,6 @@
 numpy
 flask
 transformers
-torch
+tensorflow
 youtube_transcript_api
 gunicorn
