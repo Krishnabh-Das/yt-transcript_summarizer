@@ -1,7 +1,7 @@
 numpy
 flask
 transformers
-tensorflow
+tensorflow-gpu
 tqdm
 torch
 youtube_transcript_api
