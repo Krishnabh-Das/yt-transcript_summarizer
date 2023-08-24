@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify
-from gensim import summarization import summarize
-from summarization import summarize
+import importlib
 import re
 from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api._errors import TranscriptsDisabled
@@ -30,7 +29,30 @@ def get_summary_from_link(link):
         for i in transcript:
             result += i['text']+' '
 
-        summary = summarize(result, ratio=0.25) 
+        
+        # Import sumy.parsers.plaintext
+        PlaintextParser = importlib.import_module("sumy.parsers.plaintext").PlaintextParser
+        
+        # Import sumy.nlp.tokenizers
+        Tokenizer = importlib.import_module("sumy.nlp.tokenizers").Tokenizer
+        
+        # Import sumy.summarizers.lsa
+        LsaSummarizer = importlib.import_module("sumy.summarizers.lsa").LsaSummarizer
+        
+        # Your long text
+        long_text = """
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus gravida nulla nec dui ultrices, vitae tincidunt purus accumsan. Donec eu justo tortor. Ut nec diam eget urna fringilla cursus. Proin ullamcorper leo at tellus bibendum luctus. Nullam sit amet facilisis libero. Sed nec libero vel justo malesuada eleifend. Suspendisse euismod libero a odio faucibus, id euismod quam scelerisque. In hac habitasse platea dictumst. Quisque condimentum lectus vel odio bibendum, a interdum sapien finibus. Integer fringilla vitae leo sit amet fermentum.
+        """
+        
+        # Initialize the parser and tokenizer
+        parser = PlaintextParser.from_string(long_text, Tokenizer("english"))
+        
+        # Initialize the summarizer
+        summarizer = LsaSummarizer()
+        
+        # Get the summary
+        summary = summarizer(parser.document, sentences_count=3)  # Adjust the number of sentences as needed
+        
         cleaned_out = remove_bracketed_words(summary)  # Remove words and brackets
         cleaned_out = clean_text(cleaned_out)
         return cleaned_out
