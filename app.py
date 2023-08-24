@@ -1,13 +1,13 @@
 from flask import Flask, request, jsonify
 from summarizer import Summarizer
-from summarizer.sbert import BertSummarizer
 import re
 from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api._errors import TranscriptsDisabled
 
 app = Flask(__name__)
 
-model = SBertSummarizer('paraphrase-MiniLM-L6-v2')
+# Initialize the BertSummarizer
+model = Summarizer()
 
 def summarize_text(text):
     sentences = nltk.sent_tokenize(text)
@@ -40,11 +40,11 @@ def get_summary_from_link(link):
         for i in transcript:
             result += i['text']+' '
 
-        result = model(body, num_sentences=5)
+        result = model(result, num_sentences=5)  # Use the model for summarization
 
         cleaned_out = remove_bracketed_words(result)  # Remove words and brackets
         cleaned_out = clean_text(cleaned_out)
-        
+
         return cleaned_out
 
     except TranscriptsDisabled as e:
