@@ -1,9 +1,6 @@
-import requests
 from flask import Flask, request, jsonify
 from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api._errors import TranscriptsDisabled
-
-import summarizer
 
 app = Flask(__name__)
 
@@ -19,10 +16,7 @@ def get_summary_from_link(link):
         for i in transcript:
             result += i['text']+' '
 
-        # Make a request to the Summarizer API
-        summary = summarizer.summarize(result)
-
-        return summary
+        return result
 
     except TranscriptsDisabled as e:
         return "Transcripts are disabled for this video."
