@@ -1,4 +1,5 @@
 numpy
+nltk
 flask
 youtube_transcript_api
 gunicorn
