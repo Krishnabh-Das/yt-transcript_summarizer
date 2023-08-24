@@ -27,7 +27,7 @@ def get_summary_from_link(link):
         for i in transcript:
             result += i['text']+' '
 
-        cleaned_out = remove_bracketed_words(out)
+        cleaned_out = remove_bracketed_words(result)
         cleaned_out = clean_text(cleaned_out) 
 
         return cleaned_out
