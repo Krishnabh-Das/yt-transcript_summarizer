@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from summarizer import Summarizer
+from summarizer.sbert import BertSummarizer
 import re
 from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api._errors import TranscriptsDisabled
@@ -7,7 +7,7 @@ from youtube_transcript_api._errors import TranscriptsDisabled
 app = Flask(__name__)
 
 # Initialize the BertSummarizer
-model = Summarizer()
+model = BertSummarizer('bert-base-uncased')
 
 def summarize_text(text):
     sentences = nltk.sent_tokenize(text)
