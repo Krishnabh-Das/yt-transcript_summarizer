@@ -1,6 +1,7 @@
 numpy
 flask
 transformers
+tensorflow
 tqdm
 torch
 youTubeTranscriptApi
