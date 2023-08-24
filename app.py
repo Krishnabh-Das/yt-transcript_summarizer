@@ -4,6 +4,17 @@ from youtube_transcript_api._errors import TranscriptsDisabled
 
 app = Flask(__name__)
 
+def clean_text(text):
+    # Remove extra spaces and spaces before punctuation
+    cleaned_text = re.sub(r'\s+', ' ', text)
+    cleaned_text = re.sub(r'\s([.,;!?])', r'\1', cleaned_text)
+    return cleaned_text.strip()
+
+def remove_bracketed_words(text):
+    # Remove words enclosed in square brackets including the brackets
+    cleaned_text = re.sub(r'\[.*?\]', '', text)
+    return cleaned_text
+
 def get_summary_from_link(link):
     try:
         if '=' in link:
@@ -16,7 +27,10 @@ def get_summary_from_link(link):
         for i in transcript:
             result += i['text']+' '
 
-        return result
+        cleaned_out = remove_bracketed_words(out)
+        cleaned_out = clean_text(cleaned_out) 
+
+        return cleaned_out
 
     except TranscriptsDisabled as e:
         return "Transcripts are disabled for this video."
