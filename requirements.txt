@@ -1,6 +1,4 @@
 numpy
 flask
-transformers
-tensorflow
 youtube_transcript_api
 gunicorn
