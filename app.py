@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from gensim.summarization import summarize
 import re
 from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api._errors import TranscriptsDisabled
@@ -27,7 +28,9 @@ def get_summary_from_link(link):
         result = ""
         for i in transcript:
             result += i['text']+' '
-        cleaned_out = remove_bracketed_words(result)  # Remove words and brackets
+
+        summary = summarize(result, ratio=0.25) 
+        cleaned_out = remove_bracketed_words(summary)  # Remove words and brackets
         cleaned_out = clean_text(cleaned_out)
         return cleaned_out
 
