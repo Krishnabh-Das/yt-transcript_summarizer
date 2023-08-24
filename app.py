@@ -6,32 +6,6 @@ from youtube_transcript_api._errors import TranscriptsDisabled
 
 app = Flask(__name__)
 
-model_name = "facebook/bart-small-cnn"
-summarizer = pipeline('summarization', model="facebook/bart-large-cnn")
-
-def processing(result, value):
-    def clean_text(text):
-        cleaned_text = re.sub(r'\s+', ' ', text)
-        cleaned_text = re.sub(r'\s([.,;!?])', r'\1', cleaned_text)
-        return cleaned_text.strip()
-
-    def remove_bracketed_words(text):
-        cleaned_text = re.sub(r'\[.*?\]', '', text)
-        return cleaned_text
-
-    def summarize(text):
-        summarized_text1 = summarizer(text, max_length=1000 * value, min_length=30 * value, do_sample=True)
-        cleaned_out = remove_bracketed_words(summarized_text1)
-        cleaned_out = clean_text(cleaned_out)
-        return cleaned_out
-
-    summarized_text = summarize(result)
-
-    bullet_pointed_text = re.sub(r'([.?!"\'\n])\s+', r'\1\n• ', summarized_text)
-    bullet_pointed_text = bullet_pointed_text.replace('• ', '\n• ')
-
-    return bullet_pointed_text
-
 def get_summary_from_link(link, value):
     try:
         if '=' in link:
@@ -42,8 +16,7 @@ def get_summary_from_link(link, value):
         transcript = YouTubeTranscriptApi.get_transcript(video_id)
         result = " ".join([i['text'] for i in transcript])
 
-        cleaned_summary = processing(result, value)
-        return cleaned_summary
+        return result
 
     except TranscriptsDisabled as e:
         return "Transcripts are disabled for this video."
