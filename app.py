@@ -6,7 +6,7 @@ from youtube_transcript_api._errors import TranscriptsDisabled
 
 app = Flask(__name__)
 
-model_name = "sshleifer/distilbart-cnn-12-6"
+model_name = "facebook/bart-small-cnn"
 summarizer = pipeline('summarization', model=model_name, revision="a4f8f3e")
 
 def processing(result, value):
