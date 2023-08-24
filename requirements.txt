@@ -3,6 +3,5 @@ flask==2.2.5
 transformers==4.30.2
 tqdm==4.66.1
 torch==1.31.1
-YouTubeTranscriptApi
-YouTubeTranscriptApi._errors
+youTubeTranscriptApi
 gunicorn
