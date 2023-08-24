@@ -1,13 +1,14 @@
 from flask import Flask, request, jsonify
-import nltk
+from summarizer import Summarizer
+from summarizer import sbert
+from sbert import SBertSummarizer
 import re
 from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api._errors import TranscriptsDisabled
 
 app = Flask(__name__)
 
-# Download the necessary NLTK resource
-nltk.download('punkt')
+model = SBertSummarizer('paraphrase-MiniLM-L6-v2')
 
 def summarize_text(text):
     sentences = nltk.sent_tokenize(text)
@@ -40,9 +41,9 @@ def get_summary_from_link(link):
         for i in transcript:
             result += i['text']+' '
 
-        summary = summarize_text(result)
+        result = model(body, num_sentences=5)
 
-        cleaned_out = remove_bracketed_words(summary)  # Remove words and brackets
+        cleaned_out = remove_bracketed_words(result)  # Remove words and brackets
         cleaned_out = clean_text(cleaned_out)
         
         return cleaned_out
