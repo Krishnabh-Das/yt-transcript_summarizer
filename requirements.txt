@@ -1,6 +1,4 @@
 numpy
-summarizer
-bert-extractive-summarizer
 flask
 youtube_transcript_api
 gunicorn
