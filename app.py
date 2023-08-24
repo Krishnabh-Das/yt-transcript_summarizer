@@ -6,6 +6,9 @@ from youtube_transcript_api._errors import TranscriptsDisabled
 
 app = Flask(__name__)
 
+# Download the necessary NLTK resource
+nltk.download('punkt')
+
 def summarize_text(text):
     sentences = nltk.sent_tokenize(text)
     summary = sentences[0]
