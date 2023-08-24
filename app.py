@@ -26,7 +26,7 @@ def get_summary_from_link(link):
         transcript = YouTubeTranscriptApi.get_transcript(video_id)
         result = ""
         for i in transcript:
-            result += ' ' + i['text']
+            result += i['text'] + '. '
         cleaned_out = remove_bracketed_words(result)  # Remove words and brackets
         cleaned_out = clean_text(cleaned_out)
         return cleaned_out
