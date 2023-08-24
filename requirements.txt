@@ -4,5 +4,6 @@ flask
 transformers
 tensorflow
 tqdm
+torch
 youtube_transcript_api
 gunicorn
