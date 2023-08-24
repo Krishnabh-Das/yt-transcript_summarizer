@@ -1,4 +1,5 @@
 numpy
 flask
+summarizer
 youtube_transcript_api
 gunicorn
