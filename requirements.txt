@@ -1,4 +1,7 @@
 numpy
 flask
-youtube_transcript_api
+transformers
+tqdm
+torch
+tensorflow
 gunicorn
