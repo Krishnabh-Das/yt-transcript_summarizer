@@ -1,12 +1,17 @@
 
 from flask import Flask, request, jsonify
-from transformers import pipeline
+from transformers import pipeline, AutoModelForSeq2SeqLM, AutoTokenizer
 import re
+
 from tqdm import tqdm
 
 app = Flask(__name__)
 
-summarizer = pipeline('summarization')
+model_id = "t5-small"
+tokenizer = AutoTokenizer.from_pretrained(model_id)
+model = AutoModelForSeq2SeqLM.from_pretrained(model_id)
+
+summarizer = pipeline("summarization", model=model, tokenizer=tokenizer)
 
 
 def processing(result):
@@ -64,4 +69,4 @@ def summarize_route():  # Rename the route handler to avoid conflict
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=8080)
