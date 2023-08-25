@@ -6,7 +6,7 @@ from tqdm import tqdm
 
 app = Flask(__name__)
 
-summarizer = pipeline('summarization', model ='summarizer')
+summarizer = pipeline('summarization')
 
 
 def processing(result):
