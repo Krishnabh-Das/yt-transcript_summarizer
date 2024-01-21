@@ -1,9 +1,17 @@
 # yt-transcript_summarizer
 Summarizes the youtube transcript from video link
 
-<div style="display: flex; justify-content: space-between;">
-    [![Image 1](https://raw.githubusercontent.com/Krishnabh-Das/yt-transcript_summarizer/9b4d8f16af47fff3aa3f5f2334089c44d2da9107/qrcode_92492580_cf98df6211e82160791867f62830b32e%20(3).png)](https://link-to-your-page-1)
-    [![Image 2](https://raw.githubusercontent.com/Krishnabh-Das/yt-transcript_summarizer/9b4d8f16af47fff3aa3f5f2334089c44d2da9107/qrcode_92492580_cf98df6211e82160791867f62830b32e%20(3).png)](https://link-to-your-page-2)
-    [![Image 3](https://raw.githubusercontent.com/Krishnabh-Das/yt-transcript_summarizer/9b4d8f16af47fff3aa3f5f2334089c44d2da9107/qrcode_92492580_cf98df6211e82160791867f62830b32e%20(3).png)](https://link-to-your-page-3)
-</div>
+
+<p align="center">
+    <a href="https://link-to-your-page-1">
+        <img src="https://raw.githubusercontent.com/your-username/your-repository/main/images/image1.svg" alt="Image 1" />
+    </a>
+    <a href="https://link-to-your-page-2">
+        <img src="https://raw.githubusercontent.com/your-username/your-repository/main/images/image2.svg" alt="Image 2" />
+    </a>
+    <a href="https://link-to-your-page-3">
+        <img src="https://raw.githubusercontent.com/your-username/your-repository/main/images/image3.svg" alt="Image 3" />
+    </a>
+</p>
+
 
